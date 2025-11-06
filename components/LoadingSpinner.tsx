@@ -1,7 +1,12 @@
-
 import React from 'react';
 
-export const LoadingSpinner: React.FC = () => {
+interface LoadingSpinnerProps {
+    candidateCount: number;
+}
+
+export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ candidateCount }) => {
+    const text = candidateCount > 1 ? 'Comparing Resumes...' : 'Analyzing Resume...';
+    
     return (
         <div className="bg-white/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200 text-center text-slate-500">
              <div className="flex items-center justify-center space-x-2">
@@ -9,7 +14,7 @@ export const LoadingSpinner: React.FC = () => {
                 <div className="w-3 h-3 bg-brand-secondary rounded-full animate-pulse-fast [animation-delay:0.2s]"></div>
                 <div className="w-3 h-3 bg-brand-secondary rounded-full animate-pulse-fast [animation-delay:0.4s]"></div>
             </div>
-            <h3 className="mt-4 text-lg font-medium text-slate-700">Analyzing Candidate...</h3>
+            <h3 className="mt-4 text-lg font-medium text-slate-700">{text}</h3>
             <p className="mt-1 text-sm">
                 The AI is reviewing the documents. This may take a moment.
             </p>

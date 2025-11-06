@@ -10,25 +10,14 @@ export interface AnalysisResult {
     summary: string;
     strengths: string[];
     weaknesses: string[];
-    yearsOfExperience: number;
-    highestEducation: string;
-}
-
-export interface CandidateInput {
-    id: number;
-    name: string;
-    resume: string;
 }
 
 export interface ComparisonResult {
     comparisonSummary: string;
-    candidateAnalyses: (Omit<AnalysisResult, 'yearsOfExperience' | 'highestEducation'> & { name: string; yearsOfExperience: number; highestEducation: string; })[];
-    keyComparisons: {
-        experience: string;
-        education: string;
-    };
+    candidateAnalyses: (AnalysisResult & { name: string })[];
 }
 
+// FIX: Added missing SkillsGapAnalysis interface to resolve compilation error.
 export interface SkillsGapAnalysis {
     topInDemandSkills: string[];
     requiredSkills: string[];
@@ -36,9 +25,4 @@ export interface SkillsGapAnalysis {
     gapSkills: string[];
     surplusSkills: string[];
     analysisSummary: string;
-}
-
-export interface AnonymizationPreview {
-    isLoading: boolean;
-    text: string;
 }
