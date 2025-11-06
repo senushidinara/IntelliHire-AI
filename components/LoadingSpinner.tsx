@@ -6,16 +6,16 @@ interface LoadingSpinnerProps {
 
 export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ candidateCount }) => {
     const text = candidateCount > 1 ? 'Comparing Resumes...' : 'Analyzing Resume...';
-    
+
     return (
-        <div className="bg-white/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-slate-200 text-center text-slate-500">
-             <div className="flex items-center justify-center space-x-2">
-                <div className="w-3 h-3 bg-brand-secondary rounded-full animate-pulse-fast"></div>
-                <div className="w-3 h-3 bg-brand-secondary rounded-full animate-pulse-fast [animation-delay:0.2s]"></div>
-                <div className="w-3 h-3 bg-brand-secondary rounded-full animate-pulse-fast [animation-delay:0.4s]"></div>
+        <div className="bg-gradient-to-br from-cyan-50 to-teal-50 backdrop-blur-sm p-10 rounded-2xl shadow-xl border-2 border-cyan-200 text-center">
+             <div className="flex items-center justify-center space-x-3">
+                <div className="w-4 h-4 bg-cyan-500 rounded-full animate-pulse-fast"></div>
+                <div className="w-4 h-4 bg-teal-500 rounded-full animate-pulse-fast [animation-delay:0.2s]"></div>
+                <div className="w-4 h-4 bg-cyan-500 rounded-full animate-pulse-fast [animation-delay:0.4s]"></div>
             </div>
-            <h3 className="mt-4 text-lg font-medium text-slate-700">{text}</h3>
-            <p className="mt-1 text-sm">
+            <h3 className="mt-6 text-2xl font-bold text-teal-800">✨ {text}</h3>
+            <p className="mt-3 text-base text-teal-600">
                 The AI is reviewing the documents. This may take a moment.
             </p>
         </div>

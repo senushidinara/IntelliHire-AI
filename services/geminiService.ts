@@ -2,13 +2,12 @@ import { GoogleGenAI, Type } from "@google/genai";
 import type { AnalysisResult, ComparisonResult } from '../types';
 import { Recommendation } from '../types';
 
-const API_KEY = process.env.API_KEY;
-
-if (!API_KEY) {
-    throw new Error("API_KEY environment variable not set");
-}
-
-const ai = new GoogleGenAI({ apiKey: API_KEY });
+const createAIClient = (apiKey: string) => {
+    if (!apiKey || apiKey.trim() === '') {
+        throw new Error("API key is required to analyze resumes.");
+    }
+    return new GoogleGenAI({ apiKey });
+};
 
 const analysisSchema = {
     type: Type.OBJECT,
@@ -66,8 +65,10 @@ const comparisonSchema = {
 export const analyzeSingleResume = async (
     jobDescription: string,
     markingScheme: string,
-    resume: string
+    resume: string,
+    apiKey: string
 ): Promise<AnalysisResult> => {
+    const ai = createAIClient(apiKey);
     const prompt = `
         You are an expert Senior Hiring Manager. Your task is to analyze a candidate resume against a job description and an optional marking scheme, providing a detailed, unbiased evaluation in JSON format.
 
@@ -124,8 +125,10 @@ export const analyzeSingleResume = async (
 export const compareResumes = async (
     jobDescription: string,
     markingScheme: string,
-    resumes: string[]
+    resumes: string[],
+    apiKey: string
 ): Promise<ComparisonResult> => {
+    const ai = createAIClient(apiKey);
 
     const candidateResumes = resumes.map((resume, index) => `
         **Candidate ${index + 1} Resume**:

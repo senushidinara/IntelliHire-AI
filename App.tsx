@@ -14,12 +14,13 @@ export interface Candidate {
 }
 
 const App: React.FC = () => {
+    const [apiKey, setApiKey] = useState('');
     const [jobDescription, setJobDescription] = useState('');
     const [jobDescriptionFileName, setJobDescriptionFileName] = useState('');
 
     const [markingScheme, setMarkingScheme] = useState('');
     const [markingSchemeFileName, setMarkingSchemeFileName] = useState('');
-    
+
     const [candidates, setCandidates] = useState<Candidate[]>([{ resume: '', fileName: '' }]);
 
     const [singleAnalysisResult, setSingleAnalysisResult] = useState<AnalysisResult | null>(null);
@@ -90,6 +91,11 @@ const App: React.FC = () => {
     const handleAnalyze = async () => {
         const validCandidates = candidates.filter(c => c.resume.trim());
 
+        if (!apiKey.trim()) {
+            setError('Please enter your Gemini API key to get started.');
+            return;
+        }
+
         if (!jobDescription.trim() || validCandidates.length === 0) {
             setError('Please provide a Job Description and at least one Candidate Resume.');
             return;
@@ -104,14 +110,16 @@ const App: React.FC = () => {
                 const analysis = await analyzeSingleResume(
                     jobDescription,
                     markingScheme,
-                    validCandidates[0].resume
+                    validCandidates[0].resume,
+                    apiKey
                 );
                 setSingleAnalysisResult(analysis);
             } else {
                 const analysis = await compareResumes(
                     jobDescription,
                     markingScheme,
-                    validCandidates.map(c => c.resume)
+                    validCandidates.map(c => c.resume),
+                    apiKey
                 );
                 setComparisonResult(analysis);
             }
@@ -176,8 +184,8 @@ const App: React.FC = () => {
     const validCandidateCount = candidates.filter(c => c.resume.trim()).length;
 
     return (
-        <div className="min-h-screen bg-slate-100/50 text-slate-800">
-            <Header />
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 text-slate-800">
+            <Header apiKey={apiKey} onApiKeyChange={setApiKey} />
             <main className="container mx-auto px-4 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                     <ApplicationForm
