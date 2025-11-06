@@ -14,12 +14,13 @@ export interface Candidate {
 }
 
 const App: React.FC = () => {
+    const [apiKey, setApiKey] = useState('');
     const [jobDescription, setJobDescription] = useState('');
     const [jobDescriptionFileName, setJobDescriptionFileName] = useState('');
 
     const [markingScheme, setMarkingScheme] = useState('');
     const [markingSchemeFileName, setMarkingSchemeFileName] = useState('');
-    
+
     const [candidates, setCandidates] = useState<Candidate[]>([{ resume: '', fileName: '' }]);
 
     const [singleAnalysisResult, setSingleAnalysisResult] = useState<AnalysisResult | null>(null);
