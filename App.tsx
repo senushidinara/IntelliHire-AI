@@ -91,6 +91,11 @@ const App: React.FC = () => {
     const handleAnalyze = async () => {
         const validCandidates = candidates.filter(c => c.resume.trim());
 
+        if (!apiKey.trim()) {
+            setError('Please enter your Gemini API key to get started.');
+            return;
+        }
+
         if (!jobDescription.trim() || validCandidates.length === 0) {
             setError('Please provide a Job Description and at least one Candidate Resume.');
             return;
@@ -105,14 +110,16 @@ const App: React.FC = () => {
                 const analysis = await analyzeSingleResume(
                     jobDescription,
                     markingScheme,
-                    validCandidates[0].resume
+                    validCandidates[0].resume,
+                    apiKey
                 );
                 setSingleAnalysisResult(analysis);
             } else {
                 const analysis = await compareResumes(
                     jobDescription,
                     markingScheme,
-                    validCandidates.map(c => c.resume)
+                    validCandidates.map(c => c.resume),
+                    apiKey
                 );
                 setComparisonResult(analysis);
             }
