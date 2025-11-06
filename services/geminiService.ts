@@ -125,8 +125,10 @@ export const analyzeSingleResume = async (
 export const compareResumes = async (
     jobDescription: string,
     markingScheme: string,
-    resumes: string[]
+    resumes: string[],
+    apiKey: string
 ): Promise<ComparisonResult> => {
+    const ai = createAIClient(apiKey);
 
     const candidateResumes = resumes.map((resume, index) => `
         **Candidate ${index + 1} Resume**:
