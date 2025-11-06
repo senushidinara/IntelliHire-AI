@@ -55,66 +55,66 @@ interface ComparisonResultDisplayProps {
 
 export const ComparisonResultDisplay: React.FC<ComparisonResultDisplayProps> = ({ result, onSendToManager }) => {
     return (
-        <div className="bg-white p-6 rounded-xl shadow-lg border border-slate-200 space-y-6 animate-fade-in">
+        <div className="bg-gradient-to-br from-white to-cyan-50 p-8 rounded-2xl shadow-xl border-2 border-cyan-200 space-y-7 animate-fade-in">
              <div>
-                <h2 className="text-lg font-semibold text-slate-800">AI Comparison Result</h2>
-                <p className="text-sm text-slate-500">Side-by-side analysis based on your marking scheme.</p>
+                <h2 className="text-2xl font-bold text-teal-800">🏆 AI Comparison Result</h2>
+                <p className="text-base text-teal-600 mt-1">Side-by-side analysis based on your marking scheme.</p>
             </div>
 
-            <div className="bg-slate-50 border border-slate-200 rounded-lg p-4">
-                 <h3 className="text-base font-semibold text-slate-800 flex items-center mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-brand-primary" viewBox="0 0 20 20" fill="currentColor">
+            <div className="bg-gradient-to-br from-cyan-100 to-teal-100 border-2 border-cyan-200 rounded-xl p-6 shadow-sm">
+                 <h3 className="text-xl font-bold text-teal-800 flex items-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 mr-3 text-cyan-600" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M10 2a6 6 0 00-6 6v3.586l-1.707 1.707A1 1 0 003 15v2a1 1 0 001 1h12a1 1 0 001-1v-2a1 1 0 00-.293-.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
                     </svg>
                     Overall Summary & Recommendation
                 </h3>
-                <p className="text-sm text-slate-600 leading-relaxed whitespace-pre-wrap">{result.comparisonSummary}</p>
+                <p className="text-base text-slate-700 leading-relaxed whitespace-pre-wrap font-medium">{result.comparisonSummary}</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {result.candidateAnalyses.map((analysis) => {
                     const styles = recommendationStyles[analysis.recommendation];
                     return (
-                        <div key={analysis.name} className="border border-slate-200 rounded-lg p-4 space-y-4 bg-white flex flex-col">
-                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                                <h3 className="text-base font-semibold text-slate-800 truncate" title={analysis.name}>{analysis.name}</h3>
-                                <div className={`inline-flex items-center space-x-2 px-2.5 py-1 rounded-full text-xs font-semibold ${styles.badge}`}>
+                        <div key={analysis.name} className="border-2 border-cyan-200 rounded-xl p-6 space-y-5 bg-white flex flex-col shadow-md hover:shadow-lg transition-shadow">
+                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                                <h3 className="text-lg font-bold text-teal-800 truncate" title={analysis.name}>{analysis.name}</h3>
+                                <div className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-bold ${styles.badge} shadow-md`}>
                                     {styles.icon}
                                     <span>{analysis.recommendation}</span>
                                 </div>
                             </div>
 
                              <div>
-                                <div className="flex items-baseline justify-between">
-                                    <span className="text-xs font-medium text-slate-500">Match Score</span>
-                                    <span className={`text-xl font-bold ${styles.text}`}>{analysis.matchScore}%</span>
+                                <div className="flex items-baseline justify-between mb-3">
+                                    <span className="text-sm font-bold text-teal-700">Match Score</span>
+                                    <span className={`text-3xl font-bold ${styles.text}`}>{analysis.matchScore}%</span>
                                 </div>
-                                <div className="w-full bg-slate-200 rounded-full h-2 mt-1">
-                                    <div className="bg-brand-secondary h-2 rounded-full" style={{ width: `${analysis.matchScore}%` }}></div>
+                                <div className="w-full bg-cyan-200 rounded-full h-3 shadow-sm">
+                                    <div className="bg-gradient-to-r from-cyan-500 to-teal-500 h-3 rounded-full transition-all duration-500" style={{ width: `${analysis.matchScore}%` }}></div>
                                 </div>
                             </div>
-                            
-                            <div className="text-sm text-slate-600 py-2 border-y border-slate-100">
+
+                            <div className="text-base text-slate-700 py-4 border-y-2 border-cyan-100 font-medium">
                                 {analysis.summary}
                             </div>
 
 
                             <div className="flex-grow">
-                                <h4 className="text-sm font-semibold text-slate-700 mb-2">Strengths</h4>
-                                <ul className="space-y-1.5">
+                                <h4 className="text-base font-bold text-teal-800 mb-3">💪 Strengths</h4>
+                                <ul className="space-y-2.5">
                                     {analysis.strengths.map((strength, index) => (
                                         <ListItem key={index} type="strength">{strength}</ListItem>
                                     ))}
-                                    {analysis.strengths.length === 0 && <p className="text-sm text-slate-500 italic">No specific strengths identified.</p>}
+                                    {analysis.strengths.length === 0 && <p className="text-base text-slate-500 italic">No specific strengths identified.</p>}
                                 </ul>
                             </div>
                              <div className="flex-grow">
-                                <h4 className="text-sm font-semibold text-slate-700 mb-2 pt-2 border-t border-slate-100">Weaknesses</h4>
-                                <ul className="space-y-1.5">
+                                <h4 className="text-base font-bold text-teal-800 mb-3 pt-4 border-t-2 border-cyan-100">⚠️ Weaknesses</h4>
+                                <ul className="space-y-2.5">
                                     {analysis.weaknesses.map((weakness, index) => (
                                        <ListItem key={index} type="weakness">{weakness}</ListItem>
                                     ))}
-                                    {analysis.weaknesses.length === 0 && <p className="text-sm text-slate-500 italic">No specific weaknesses identified.</p>}
+                                    {analysis.weaknesses.length === 0 && <p className="text-base text-slate-500 italic">No specific weaknesses identified.</p>}
                                 </ul>
                             </div>
                         </div>
@@ -122,16 +122,16 @@ export const ComparisonResultDisplay: React.FC<ComparisonResultDisplayProps> = (
                 })}
             </div>
 
-             <div className="pt-4 border-t border-slate-200">
+             <div className="pt-6 border-t-2 border-cyan-200">
                 <button
                     onClick={onSendToManager}
-                    className="w-full flex justify-center items-center py-2.5 px-4 border border-slate-300 rounded-md shadow-sm text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-secondary transition-colors duration-200"
+                    className="w-full flex justify-center items-center py-3.5 px-6 border-2 border-cyan-300 rounded-xl shadow-lg text-base font-bold text-teal-700 bg-white hover:bg-cyan-50 hover:border-cyan-400 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-cyan-300 transition-all duration-200"
                 >
-                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                      </svg>
-                     Send to Hiring Manager
+                     ✉️ Send to Hiring Manager
                 </button>
             </div>
         </div>
