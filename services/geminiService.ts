@@ -65,8 +65,10 @@ const comparisonSchema = {
 export const analyzeSingleResume = async (
     jobDescription: string,
     markingScheme: string,
-    resume: string
+    resume: string,
+    apiKey: string
 ): Promise<AnalysisResult> => {
+    const ai = createAIClient(apiKey);
     const prompt = `
         You are an expert Senior Hiring Manager. Your task is to analyze a candidate resume against a job description and an optional marking scheme, providing a detailed, unbiased evaluation in JSON format.
 
