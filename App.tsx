@@ -184,8 +184,8 @@ const App: React.FC = () => {
     const validCandidateCount = candidates.filter(c => c.resume.trim()).length;
 
     return (
-        <div className="min-h-screen bg-slate-100/50 text-slate-800">
-            <Header />
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 text-slate-800">
+            <Header apiKey={apiKey} onApiKeyChange={setApiKey} />
             <main className="container mx-auto px-4 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                     <ApplicationForm
