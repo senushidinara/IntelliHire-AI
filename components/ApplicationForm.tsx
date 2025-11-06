@@ -94,14 +94,14 @@ const InputSwitcher: React.FC<InputSwitcherProps> = ({ value, fileName, onChange
             ) : (
                 <textarea
                     rows={rows}
-                    className="block w-full rounded-md border-slate-300 shadow-sm focus:border-brand-secondary focus:ring-brand-secondary sm:text-sm transition duration-150 ease-in-out bg-slate-50"
+                    className="block w-full rounded-lg border-2 border-pastel-cyan shadow-sm focus:border-brand-secondary focus:ring-2 focus:ring-cyan-300/50 text-base transition-all duration-150 ease-in-out bg-gradient-to-br from-cyan-50 to-teal-50 p-4 font-medium text-slate-700 placeholder-teal-500"
                     placeholder={placeholderText}
                     value={value}
                     onChange={handleTextChange}
                 />
             )}
-             <button onClick={toggleInputType} className="mt-2 text-xs text-brand-secondary hover:underline font-medium">
-                {inputType === 'file' ? 'Or Paste Text Instead' : 'Or Upload File Instead'}
+             <button onClick={toggleInputType} className="mt-3 text-sm text-cyan-600 hover:text-cyan-800 hover:bg-cyan-100 px-3 py-2 rounded-lg font-semibold transition-all duration-150">
+                {inputType === 'file' ? '📝 Or Paste Text Instead' : '📤 Or Upload File Instead'}
             </button>
         </div>
     );
