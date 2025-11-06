@@ -34,21 +34,21 @@ const FileInput: React.FC<FileInputProps> = ({ onFileChange, fileName, placehold
 
     return (
         <div
-            className={`flex justify-center items-center w-full px-6 py-8 border-2 border-dashed rounded-md transition-colors duration-200 ease-in-out ${isDragging ? 'border-brand-primary bg-brand-light' : 'border-slate-300 bg-slate-50'}`}
+            className={`flex justify-center items-center w-full px-6 py-10 border-2 border-dashed rounded-xl transition-all duration-200 ease-in-out cursor-pointer ${isDragging ? 'border-brand-primary bg-blue-50 shadow-lg' : 'border-pastel-cyan bg-gradient-to-br from-cyan-50 to-teal-50'}`}
             onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop} onClick={() => fileInputRef.current?.click()}
         >
             <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileSelect} accept=".txt,.md,text/plain" />
             {fileName ? (
                 <div className="text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-8 w-8 text-green-500" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
-                    <p className="mt-2 text-sm font-medium text-slate-700 break-all">{fileName}</p>
-                    <button onClick={handleRemoveFile} className="mt-2 text-xs text-red-600 hover:text-red-800 font-semibold">Remove</button>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-10 w-10 text-green-500" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
+                    <p className="mt-3 text-base font-semibold text-teal-700 break-all">{fileName}</p>
+                    <button onClick={handleRemoveFile} className="mt-3 text-sm text-red-600 hover:text-red-800 font-semibold hover:bg-red-100 px-3 py-1 rounded-lg transition-colors">Remove</button>
                 </div>
             ) : (
                 <div className="text-center cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-8 w-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}><path strokeLinecap="round" strokeLinejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
-                    <p className="mt-2 text-sm text-slate-600"><span className="font-semibold text-brand-secondary">Click to upload</span> or drag and drop</p>
-                    <p className="text-xs text-slate-500">{placeholder}</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-12 w-12 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+                    <p className="mt-3 text-base text-teal-700"><span className="font-semibold text-cyan-600">Click to upload</span> or drag and drop</p>
+                    <p className="text-sm text-teal-600 mt-1">{placeholder}</p>
                 </div>
             )}
         </div>
