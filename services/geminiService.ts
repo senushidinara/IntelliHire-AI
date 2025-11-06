@@ -2,13 +2,12 @@ import { GoogleGenAI, Type } from "@google/genai";
 import type { AnalysisResult, ComparisonResult } from '../types';
 import { Recommendation } from '../types';
 
-const API_KEY = process.env.API_KEY;
-
-if (!API_KEY) {
-    throw new Error("API_KEY environment variable not set");
-}
-
-const ai = new GoogleGenAI({ apiKey: API_KEY });
+const createAIClient = (apiKey: string) => {
+    if (!apiKey || apiKey.trim() === '') {
+        throw new Error("API key is required to analyze resumes.");
+    }
+    return new GoogleGenAI({ apiKey });
+};
 
 const analysisSchema = {
     type: Type.OBJECT,
